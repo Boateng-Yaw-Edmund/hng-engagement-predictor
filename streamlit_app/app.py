@@ -139,6 +139,15 @@ else:
     X_meta = df_full[['message_length','word_count','emoji_count','hour','weekday','author_message_count']].values
     X_meta_s = meta_scaler.transform(X_meta)
 
+    feature_names = [
+        'message_length',
+        'word_count',
+        'emoji_count',
+        'hour',
+        'weekday',
+        'author_message_count'
+    ]
+
     with st.spinner("Computing SHAP on metadata model..."):
         explainer = shap.explainers.Tree(meta_model)
         shap_values = explainer(X_meta_s)
