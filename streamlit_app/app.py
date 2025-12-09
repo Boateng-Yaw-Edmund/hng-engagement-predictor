@@ -128,6 +128,12 @@ else:
     df_full['message_length'] = df_full['clean_text'].astype(str).apply(len)
     df_full['word_count'] = df_full['clean_text'].astype(str).apply(lambda x: len(x.split()))
     df_full['emoji_count'] = df_full.get('emoji_count', 0).fillna(0)
+    weekday_map = {
+    'Monday': 0, 'Tuesday': 1, 'Wednesday': 2,
+    'Thursday': 3, 'Friday': 4, 'Saturday': 5, 'Sunday': 6
+}
+    df_full['weekday'] = df_full['weekday'].map(weekday_map)
+
     auth_counts = df_full.groupby('user_id')['message_id'].count()
     df_full['author_message_count'] = df_full['user_id'].map(auth_counts).fillna(0)
     X_meta = df_full[['message_length','word_count','emoji_count','hour','weekday','author_message_count']].values
