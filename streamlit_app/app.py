@@ -139,6 +139,11 @@ else:
     X_meta = df_full[['message_length','word_count','emoji_count','hour','weekday','author_message_count']].values
     X_meta_s = meta_scaler.transform(X_meta)
 
+
+    with st.spinner("Computing SHAP on metadata model..."):
+        explainer = shap.explainers.Tree(meta_model)
+        shap_values = explainer(X_meta_s)
+
     feature_names = [
         'message_length',
         'word_count',
@@ -148,14 +153,18 @@ else:
         'author_message_count'
     ]
 
-    with st.spinner("Computing SHAP on metadata model..."):
-        explainer = shap.explainers.Tree(meta_model)
-        shap_values = explainer(X_meta_s)
+    fig, ax = plt.subplots(figsize=(8, 5))
+    shap.summary_plot(
+    shap_values,
+    X_meta_s,
+    feature_names=feature_names,
+    plot_type="bar",
+    show=False
+    )   
+    st.pyplot(fig)
+    plt.close(fig)
 
-    fig_shap = shap.plots.bar(shap_values, max_display=10, show=False)
-    st.pyplot(bbox_inches='tight')
-
-    st.markdown("Feature effects on engagement. Use this to explain which metadata features push probability up or down.")
+    st.markdown("Feature effects on engagement")
 
 
 #deployment info
