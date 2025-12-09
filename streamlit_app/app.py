@@ -19,14 +19,11 @@ DATA_PATH = BASE/ "messages_clean.csv"
 @st.cache_resource
 def load_meta_model():
     meta_model_path = MODEL_DIR / "xgb_meta.joblib"
-    if meta_model_path.exists():
-        model = joblib.load(meta_model_path)
-    else:
-        model = None
-    scaler = None
     scaler_path = MODEL_DIR / "meta_scaler.joblib"
-    if scaler_path.exists():
-        scaler = joblib.load(scaler_path)
+
+    model = joblib.load(meta_model_path) if meta_model_path.exists() else None
+    scaler = joblib.load(scaler_path) if scaler_path.exists() else None
+
     return model, scaler
 
 @st.cache_resource
