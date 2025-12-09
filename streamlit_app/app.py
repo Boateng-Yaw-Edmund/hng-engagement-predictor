@@ -11,7 +11,7 @@ from sentence_transformers import SentenceTransformer
 st.set_page_config(page_title="HNG Engagement Predictor", layout="wide")
 
 BASE = Path(__file__).parent
-MODEL_DIR = BASE / "streamlit_app/models"
+MODEL_DIR = BASE / "models"
 DATA_PATH = BASE/ "messages_clean.csv"
 
 
