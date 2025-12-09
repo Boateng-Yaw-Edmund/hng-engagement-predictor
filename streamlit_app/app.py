@@ -28,11 +28,13 @@ def load_meta_model():
 
 @st.cache_resource
 def load_embedder():
-    try:
-        embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-    except Exception:
-        embedder = None
-    return embedder
+    with st.spinner("Loading language model..."):
+        try:
+            return SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+        except Exception as e:
+            st.error(f"Could not load SBERT model: {e}")
+            return None
+
 
 @st.cache_data(ttl=3600)
 def load_data(nrows=None):
