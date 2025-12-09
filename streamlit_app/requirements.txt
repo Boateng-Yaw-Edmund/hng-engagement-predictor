@@ -1,0 +1,12 @@
+streamlit>=1.25.0
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+sentence-transformers
+shap
+matplotlib
+seaborn
+vaderSentiment
+protobuf==3.20.3
