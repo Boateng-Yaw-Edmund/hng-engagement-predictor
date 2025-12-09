@@ -83,6 +83,13 @@ with left:
                     X = np.hstack([emb, meta_s])
                     pred_prob = prod.predict_proba(X)[:,1][0]
                     st.success(f"Model (SBERT+XGB) predicted engagement probability: {pred_prob:.3f}")
+                    if pred_prob >= 0.70:
+                        st.info("High engagement expected.")
+                    elif pred_prob >= 0.40:
+                        st.info("Moderate engagement expected.")
+                    else:
+                        st.info("Low engagement expected.")
+
                 except Exception as e:
                     st.error(f"SBERT model error: {e}")
                     pred_prob = None
