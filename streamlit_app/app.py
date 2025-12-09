@@ -181,8 +181,5 @@ else:
 
 st.markdown("---")
 st.write("Deployment notes")
-#st.write("""
-#- To enable SBERT predictions include xgb_sbert.joblib and meta_scaler.joblib in models/  
-#- For smaller repo size, keep only metadata model in git and load SBERT model by name at runtime  
-#- To run locally: `streamlit run app.py` in streamlit_app folder  
-#""")
+st.caption("Models: SBERT_XGB_v1.1 | MetaModel_v1.0")
+
