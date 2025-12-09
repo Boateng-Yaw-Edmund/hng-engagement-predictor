@@ -153,7 +153,7 @@ else:
         'author_message_count'
     ]
 
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(10, 8))
     shap.summary_plot(
     shap_values,
     X_meta_s,
